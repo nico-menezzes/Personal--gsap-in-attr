@@ -7,9 +7,9 @@
   "jsdelivr": "dist/gsap-attributes.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nico-menezzes/gsap-in-attributes.git"
+    "url": "https://github.com/nico-menezzes/personal--gsap-in-attr.git"
   },
-  "homepage": "https://github.com/nico-menezzes/gsap-in-attributes#readme",
+  "homepage": "https://github.com/nico-menezzes/personal--gsap-in-attr#readme",
   "files": ["dist", "src", "README.md", "LICENSE"],
   "scripts": {
     "build": "cp src/gsap-attributes.js dist/gsap-attributes.js && terser dist/gsap-attributes.js -c -m --comments \"/^!/\" -o dist/gsap-attributes.min.js",

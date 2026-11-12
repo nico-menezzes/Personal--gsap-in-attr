@@ -4,10 +4,10 @@
 
 **Declarative GSAP animations for Webflow — no code, just `data-` attributes.**
 
-[![Version](https://img.shields.io/badge/version-1.2.0-7cf6b0?style=flat-square)](https://github.com/nico-menezzes/gsap-in-attributes/tags)
+[![Version](https://img.shields.io/badge/version-1.2.0-7cf6b0?style=flat-square)](https://github.com/nico-menezzes/personal--gsap-in-attr/tags)
 [![License: MIT](https://img.shields.io/badge/license-MIT-89b4ff?style=flat-square)](LICENSE)
 [![GSAP](https://img.shields.io/badge/GSAP-3.13%2B-88CE02?style=flat-square)](https://gsap.com)
-[![jsDelivr](https://img.shields.io/badge/CDN-jsDelivr-e84d3d?style=flat-square)](https://www.jsdelivr.com/package/gh/nico-menezzes/gsap-in-attributes)
+[![jsDelivr](https://img.shields.io/badge/CDN-jsDelivr-e84d3d?style=flat-square)](https://www.jsdelivr.com/package/gh/nico-menezzes/personal--gsap-in-attr)
 
 [Live demo & playground](https://claude.ai/code/artifact/2a3ea2fa-5c38-40f5-abee-2cf5688671d7) · [Quick start](#quick-start) · [Attribute reference](#attribute-reference) · [Presets](#presets)
 
@@ -51,7 +51,7 @@ served live via jsDelivr — see the URL in step 2.
 (site-wide), or on a single page's Footer Code:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/personal--gsap-in-attr@1/dist/gsap-attributes.min.js"></script>
 ```
 
 > `@1` always resolves to the latest `1.x.x` release. Pin an exact version with `@1.2.0` if you want full control over when you upgrade.
@@ -231,7 +231,7 @@ Set project-wide defaults before the library script loads:
     respectReducedMotion: true
   };
 </script>
-<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/personal--gsap-in-attr@1/dist/gsap-attributes.min.js"></script>
 ```
 
 ## Public API

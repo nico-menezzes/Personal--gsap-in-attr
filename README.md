@@ -1,8 +1,23 @@
+<div align="center">
+
 # GSAP in Attributes
 
-Declarative GSAP animations, driven by `data-attributes`. Built for **Webflow**
-(and any HTML). Paste **one** script into your site and pick animations right on
-your elements — type, duration, easing, delay, stagger and more.
+**Declarative GSAP animations for Webflow — no code, just `data-` attributes.**
+
+[![Version](https://img.shields.io/badge/version-1.2.0-7cf6b0?style=flat-square)](https://github.com/nico-menezzes/gsap-in-attributes/tags)
+[![License: MIT](https://img.shields.io/badge/license-MIT-89b4ff?style=flat-square)](LICENSE)
+[![GSAP](https://img.shields.io/badge/GSAP-3.13%2B-88CE02?style=flat-square)](https://gsap.com)
+[![jsDelivr](https://img.shields.io/badge/CDN-jsDelivr-e84d3d?style=flat-square)](https://www.jsdelivr.com/package/gh/nico-menezzes/gsap-in-attributes)
+
+[Live demo & playground](https://claude.ai/code/artifact/2a3ea2fa-5c38-40f5-abee-2cf5688671d7) · [Quick start](#quick-start) · [Attribute reference](#attribute-reference) · [Presets](#presets)
+
+</div>
+
+---
+
+Paste **one script tag** into your site. Then animate any element by adding
+`data-gsap` and a few optional `data-gsap-*` attributes directly in the
+Webflow Designer — no custom code, no exported animations to maintain.
 
 ```html
 <h1 data-gsap="text-up">My headline</h1>
@@ -13,105 +28,167 @@ your elements — type, duration, easing, delay, stagger and more.
      data-gsap-delay="0.2"></div>
 ```
 
-- **Zero JS** for the end user — just attributes.
-- **Auto-loads** GSAP + ScrollTrigger + SplitText + CustomEase if they aren't on the page.
-- **Split text** for free (GSAP 3.13+): lines, words, characters.
-- **Strong easing** built in: `smooth`, `snappy`, `swift`, `soft` — or your own `cubic(...)`.
-- **No flash** (FOUC): elements stay hidden until the library is ready.
-- **Accessible**: respects `prefers-reduced-motion`.
-- **Scales**: one scan, a public API to re-initialize (CMS, Barba, tabs).
+## Why
+
+| | |
+|---|---|
+| ⚡ **Zero JS for the end user** | Everything is driven by `data-*` attributes set in the Webflow Designer. |
+| 📦 **Self-loading** | Auto-fetches GSAP + ScrollTrigger + SplitText + CustomEase from jsDelivr if they aren't already on the page. |
+| ✂️ **Free split text** | Lines, words, or characters (GSAP 3.13+ SplitText, no license needed). |
+| 🎚️ **Strong easing, built in** | Four hand-picked curves (`smooth`, `snappy`, `swift`, `soft`), or bring your own `cubic-bezier`. |
+| 🪄 **No flash of unanimated content** | Elements stay hidden until the library is ready, then reveal in place. |
+| ♿ **Accessible by default** | Respects `prefers-reduced-motion` — motion is skipped, content still appears. |
+| 🧩 **Scales to real sites** | One DOM scan, a public API to re-run it after CMS loads, page transitions, or tab switches. |
 
 ---
 
-## Install in Webflow
+## Quick start
 
-1. Push this repository to GitHub (e.g. `YOUR-USER/gsap-in-attributes`).
-2. Create a release/tag (e.g. `1.0.0`) — jsDelivr uses the tag.
-3. In Webflow: **Project Settings → Custom Code → Footer Code** (or per page), paste:
+**1. Host the library.** This repo already builds `dist/gsap-attributes.min.js`,
+served live via jsDelivr — see the URL in step 2.
+
+**2. Paste the script** in Webflow → **Project Settings → Custom Code → Footer Code**
+(site-wide), or on a single page's Footer Code:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/YOUR-USER/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
 ```
 
-> Tip: `@1` always pulls the latest release of major version 1. Use `@1.0.0` to pin an exact version.
+> `@1` always resolves to the latest `1.x.x` release. Pin an exact version with `@1.2.0` if you want full control over when you upgrade.
 
-4. Publish. Now add `data-gsap="fade-up"` (via **Element Settings → Custom Attributes**)
-   to any element.
-
-If GSAP is already loaded in your project, the library detects and reuses it — no double download.
+**3. Publish**, then select any element in the Designer → **Settings (D) → Custom
+attributes** → add `data-gsap` with a preset name, e.g. `fade-up`. Publish again.
+Done — if GSAP is already on the page, the library reuses it instead of loading
+a second copy.
 
 ---
 
 ## Presets
 
-**Entrance (fade / move):**
-`fade` · `fade-up` · `fade-down` · `fade-left` · `fade-right`
-`slide-up` · `slide-down` · `slide-left` · `slide-right`
-
-**Scale / rotation:**
-`scale-in` · `zoom-in` · `rotate-in` · `flip-up` · `flip-down` · `blur-in` · `skew-in`
-
-**Reveal (clip-path):**
-`reveal-up` · `reveal-down` · `reveal-left` · `reveal-right`
-
-**Text (SplitText):**
-`text-up` (masked lines) · `text-lines` · `text-words` · `text-chars` · `text-fade` · `text-flip` · `text-fill` (scroll-linked fill)
+| Category | Presets |
+|---|---|
+| **Fade / move** | `fade` · `fade-up` · `fade-down` · `fade-left` · `fade-right` · `slide-up` · `slide-down` · `slide-left` · `slide-right` |
+| **Scale / rotate** | `scale-in` · `zoom-in` · `rotate-in` · `flip-up` · `flip-down` · `blur-in` · `skew-in` |
+| **Reveal (clip-path)** | `reveal-up` · `reveal-down` · `reveal-left` · `reveal-right` |
+| **Text (SplitText)** | `text-up` (masked lines) · `text-lines` · `text-words` · `text-chars` · `text-fade` · `text-flip` · `text-fill` (scroll-linked reading fill) |
+| **Blank canvas** | `custom` (fades by default) · `none` (no default motion) — build an entrance entirely from the [customization attributes](#customize-the-motion) below |
 
 ---
 
-## Attributes
+## Attribute reference
 
-All optional except `data-gsap`. The prefix is always `data-gsap-`.
+Everything is optional except `data-gsap`. Every attribute is prefixed
+`data-gsap-`, e.g. `data-gsap-duration`.
 
-| Attribute | Values | Default | Description |
+### Core
+
+| Attribute | Values | Default | What it does |
 |---|---|---|---|
-| `data-gsap` | preset name | — | The animation. |
-| `data-gsap-duration` | seconds | `0.8` | Duration. |
-| `data-gsap-delay` | seconds | `0` | Delay before start. |
-| `data-gsap-ease` | named curve, GSAP ease or `cubic(...)` | `smooth` | Easing. See below. |
-| `data-gsap-distance` | px | `40` | Travel distance for fades/slides. |
-| `data-gsap-stagger` | seconds | `0.06` | Gap between items (or a container's children). |
-| `data-gsap-rotation` | degrees | `8` | Initial rotation. |
-| `data-gsap-start` | ScrollTrigger start | `top 85%` | When it fires on scroll. |
-| `data-gsap-end` | ScrollTrigger end | — | End (used with scrub). |
-| `data-gsap-trigger` | `scroll` \| `load` | `scroll` | Fire on scroll or on load. |
-| `data-gsap-once` | `true` \| `false` | `true` | Play once, or every time it enters. |
-| `data-gsap-scrub` | `true` \| number | `false` | Tie progress to scroll. |
-| `data-gsap-split` | `lines`·`words`·`chars` | auto | Override text splitting. |
-| `data-gsap-target` | CSS selector | direct children | Which children to stagger. |
-| `data-gsap-markers` | `true` | `false` | Show ScrollTrigger debug markers. |
+| `data-gsap` | preset name (see [Presets](#presets)) | — | **Required.** Which animation to run. |
+| `data-gsap-duration` | seconds | `0.8` | How long the animation runs. |
+| `data-gsap-delay` | seconds | `0` | Wait before it starts. |
+| `data-gsap-ease` | named curve · GSAP ease · `cubic(...)` | `smooth` | The easing curve. See [Easing](#easing). |
+
+### Trigger (scroll vs. load)
+
+| Attribute | Values | Default | What it does |
+|---|---|---|---|
+| `data-gsap-trigger` | `scroll` · `load` | `scroll` | Fire on scroll-into-view, or immediately on page load. |
+| `data-gsap-start` | ScrollTrigger start | `top 85%` | When it fires on scroll — `[element edge] [viewport position]`. |
+| `data-gsap-end` | ScrollTrigger end | — | End point (used with `scrub`, or a custom `toggle`). |
+| `data-gsap-once` | `true` · `false` | `true` | Play once, or replay every time the element re-enters. |
+| `data-gsap-scrub` | `true` · number | `false` | Tie progress directly to the scrollbar instead of playing once. |
+| `data-gsap-trigger-element` | CSS selector | self | Animate this element, but fire when *another* one (e.g. the parent section) enters. |
+| `data-gsap-scroller` | CSS selector | window | Use a custom scrollable container instead of the page. |
+| `data-gsap-toggle` | ScrollTrigger `toggleActions` | auto | Full manual control, e.g. `play pause resume reverse`. |
+| `data-gsap-markers` | `true` | `false` | Show ScrollTrigger's debug markers (start/end lines) while you tune things. **Remove before publishing.** |
+
+### Customize the motion
+
+Override any preset's starting values, or build a motion from scratch with
+`data-gsap="custom"` / `data-gsap="none"`.
+
+| Attribute | Values | What it does |
+|---|---|---|
+| `data-gsap-distance` | px | Travel distance used by the fade/slide presets. |
+| `data-gsap-y` | px or `%` | Starting vertical offset. |
+| `data-gsap-x` | px or `%` | Starting horizontal offset. |
+| `data-gsap-opacity` | `0`–`1` | Starting opacity. |
+| `data-gsap-scale` | number | Starting scale. |
+| `data-gsap-rotate` | degrees | Starting rotation. |
+| `data-gsap-blur` | px | Starting blur (animates to sharp). |
+| `data-gsap-rotation` | degrees | Initial rotation for `rotate-in` / flip presets specifically. |
+
+### Stagger (lists, grids, split text)
+
+| Attribute | Values | Default | What it does |
+|---|---|---|---|
+| `data-gsap-stagger` | seconds | `0.06` | Gap between items when animating a group of children. |
+| `data-gsap-stagger-from` | `start` · `center` · `end` · `edges` · `random` | `start` | Where the stagger cascade begins. |
+| `data-gsap-target` | CSS selector | direct children | Which descendants to stagger (see [Staggering](#staggering-lists--grids)). |
+| `data-gsap-split` | `lines` · `words` · `chars` | preset default | Override how a `text-*` preset splits its content. |
 
 ---
 
 ## Easing
 
-Four strong curves ship built in — reference them by name:
+Four strong, intentional curves ship built in. Reference them by name:
 
 | Name | Feel | Curve |
 |---|---|---|
-| `smooth` *(default)* | strong ease-out, great for entrances | `cubic-bezier(0.23, 1, 0.32, 1)` |
-| `snappy` | iOS drawer feel | `cubic-bezier(0.32, 0.72, 0, 1)` |
-| `swift` | strong ease-in-out for on-screen movement | `cubic-bezier(0.77, 0, 0.175, 1)` |
-| `soft` | gentle ease-out | `cubic-bezier(0.25, 1, 0.5, 1)` |
+| `smooth` *(default)* | Strong ease-out — great for entrances | `cubic-bezier(0.23, 1, 0.32, 1)` |
+| `snappy` | iOS drawer feel, crisp settle | `cubic-bezier(0.32, 0.72, 0, 1)` |
+| `swift` | Strong ease-in-out, for things moving across the screen | `cubic-bezier(0.77, 0, 0.175, 1)` |
+| `soft` | Gentle, understated ease-out | `cubic-bezier(0.25, 1, 0.5, 1)` |
 
 ```html
 <div data-gsap="fade-up" data-gsap-ease="snappy"></div>
 ```
 
-Or pass your own cubic-bezier — it becomes a GSAP `CustomEase`:
+Or pass your own cubic-bezier — it's registered as a GSAP `CustomEase` automatically:
 
 ```html
 <div data-gsap="fade-up" data-gsap-ease="cubic(0.16, 1, 0.3, 1)"></div>
 ```
 
-Or use any named GSAP ease: `power1..4`, `back.out(1.7)`, `elastic.out(1, 0.4)`,
-`expo.out`, `circ.out`, `sine.inOut`, etc.
+Or use any named GSAP ease directly: `power1` … `power4`, `back.out(1.7)`,
+`elastic.out(1, 0.4)`, `expo.out`, `circ.out`, `sine.inOut`, etc.
 
 ---
 
-## Staggering lists / grids
+## Scroll fill — `text-fill`
 
-Put the attribute on the **container** and add `data-gsap-stagger` — the children enter in sequence:
+Text starts dim and brightens progressively as the reader scrolls, tied to
+the scrollbar — the "reading highlight" effect. Choose the unit with
+`data-gsap-split` and the starting dimness with `data-gsap-opacity`:
+
+```html
+<p data-gsap="text-fill"
+   data-gsap-split="words"      <!-- words | chars | lines -->
+   data-gsap-opacity="0.15"     <!-- how dim it starts -->
+   data-gsap-start="top 75%"
+   data-gsap-end="bottom 55%">Your paragraph…</p>
+```
+
+It's **scrubbed by default** (progress follows the scrollbar, not a timer), so
+`data-gsap-duration` and `data-gsap-ease` behave a little differently here:
+
+- **Speed of the fill** → controlled by `data-gsap-start` / `data-gsap-end`, not `duration`. A wider range fills more slowly.
+- **Sharpness of the read boundary** → `data-gsap-duration` + `data-gsap-stagger` control overlap between words:
+  - Crisp, one-at-a-time: `duration="0.2"` `stagger="0.15"`
+  - Soft gradient, several brightening together: `duration="0.8"` `stagger="0.05"`
+- **`data-gsap-ease`** maps against scroll position — leave it on the default (`none`, linear) for natural reading; anything else makes the fill accelerate/decelerate as you scroll.
+
+Prefer it to run once, on a timer, instead of tied to scroll? Set
+`data-gsap-scrub="false"` — `duration` and `ease` then behave exactly like
+every other preset (seconds, real easing curve).
+
+---
+
+## Staggering lists & grids
+
+Put the attribute on the **container**, add `data-gsap-stagger` — its
+children animate in sequence:
 
 ```html
 <div class="cards" data-gsap="fade-up" data-gsap-stagger="0.08">
@@ -121,93 +198,108 @@ Put the attribute on the **container** and add `data-gsap-stagger` — the child
 </div>
 ```
 
-To choose exactly which children: `data-gsap-target=".card"`.
+Only want specific descendants (not every direct child)?
+Use `data-gsap-target=".card"`.
+
+Want a real section entrance — animate a grid, but fire when its parent
+*section* scrolls in, not the grid itself?
+
+```html
+<section class="hero">
+  <div class="cards"
+       data-gsap="fade-up"
+       data-gsap-stagger="0.1"
+       data-gsap-target=".card"
+       data-gsap-trigger-element=".hero"
+       data-gsap-start="top 75%"></div>
+</section>
+```
 
 ---
 
-## Global config (optional)
+## Global config
 
-Before the script, set project-wide defaults:
+Set project-wide defaults before the library script loads:
 
 ```html
 <script>
   window.GSAPAttr = {
     defaults: { ease: 'snappy', duration: 0.9, start: 'top 80%' },
     gsapVersion: '3.13.0',
-    autoload: true,          // fetch GSAP if missing
-    hideUntilReady: true,    // prevent flash
+    autoload: true,          // fetch GSAP from jsDelivr if missing
+    hideUntilReady: true,    // prevent flash of unanimated content
     respectReducedMotion: true
   };
 </script>
-<script src="https://cdn.jsdelivr.net/gh/YOUR-USER/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nico-menezzes/gsap-in-attributes@1/dist/gsap-attributes.min.js"></script>
 ```
 
 ## Public API
 
 ```js
-GSAPAttr.refresh(root)         // re-scan (after CMS load, Barba, tab switch)
+GSAPAttr.refresh(root)         // re-scan the DOM (after CMS load, Barba transition, tab switch)
 GSAPAttr.register(name, fn)    // register a custom preset at runtime
 GSAPAttr.init()                // re-initialize everything
-GSAPAttr.eases                 // the built-in named curves
+GSAPAttr.eases                 // the built-in named curves (smooth/snappy/swift/soft)
 ```
 
-Custom preset example:
+Register your own preset:
 
 ```js
-GSAPAttr.register('drop-in', function(o){
+GSAPAttr.register('drop-in', function (o) {
   return { opacity: 0, y: -o.distance, scale: 1.1 };
 });
 ```
 
+```html
+<div data-gsap="drop-in"></div>
+```
+
 ---
 
-## Structure
+## Project structure
 
 ```
 GSAP in Attributes/
-├── src/gsap-attributes.js        ← source
-├── dist/gsap-attributes.js       ← readable build
-├── dist/gsap-attributes.min.js   ← minified build (jsDelivr)
-├── demo/index.html               ← demo + docs + playground
+├── src/gsap-attributes.js        ← source (read this to understand the internals)
+├── dist/gsap-attributes.js       ← readable build (same content, pre-build step)
+├── dist/gsap-attributes.min.js   ← minified build — this is what jsDelivr serves
+├── demo/index.html               ← docs, playground, and live simulators
+├── demo/standalone.html          ← single-file version of the demo (no server needed)
+├── build-standalone.js           ← regenerates demo/standalone.html from demo/ + src/
 └── README.md
 ```
 
-Open `demo/index.html` in a browser to see everything running.
+Open `demo/index.html` (or `demo/standalone.html` directly) in a browser to
+try every preset live, including a load-intro simulator and a scoped
+scroll-trigger simulator.
 
 ---
 
-## Scroll fill (`text-fill`)
+## Changelog
 
-Text starts dim and brightens word-by-word (or letter/line) as you scroll, tied to
-the scrollbar. Set the starting opacity with `data-gsap-opacity` and the unit with
-`data-gsap-split`:
+### v1.2.0
+- **`text-fill`** — scroll-linked "reading" fill (dim → bright), split by words/letters/lines, adjustable starting opacity.
 
-```html
-<p data-gsap="text-fill"
-   data-gsap-split="words"      <!-- words | chars | lines -->
-   data-gsap-opacity="0.15"     <!-- dim starting opacity -->
-   data-gsap-start="top 75%"
-   data-gsap-end="bottom 55%">Your paragraph…</p>
-```
-
-It's scrubbed by default (progress follows scroll). For a sharper read boundary, lower
-`data-gsap-duration` and raise `data-gsap-stagger`; for a softer gradient, do the opposite.
-
-## New in v1.2
-
-- `text-fill` — scroll-linked "reading" fill (dim → bright), split by words/letters/lines, with adjustable start opacity.
-
-## New in v1.1
-
+### v1.1.0
 - `data-gsap-trigger="scroll|load"` clearly separates the two entrance kinds.
-- Per-property overrides: `-y` `-x` `-opacity` `-scale` `-rotate` `-blur` (fine-tune any preset or use `data-gsap="custom"`).
-- `-trigger-element` fires when a parent section enters; `-toggle` for full toggleActions; `-stagger-from` for cascade origin.
+- Per-property overrides: `-y` `-x` `-opacity` `-scale` `-rotate` `-blur` — fine-tune any preset, or build one from scratch with `data-gsap="custom"` / `"none"`.
+- `-trigger-element` fires when a parent section enters; `-toggle` for full `toggleActions` control; `-stagger-from` for cascade origin; `-scroller` for custom scroll containers.
 
-## Roadmap (v2)
+### v1.0.0
+- Initial release: fade/slide/scale/rotate/reveal presets, SplitText-based text presets, named easing curves, FOUC guard, reduced-motion support.
 
-- Attribute-chained timelines (`data-gsap-timeline`).
-- Dedicated parallax and scroll effects.
-- Hover / click triggers.
-- Exit presets for page transitions.
+---
 
-MIT · built by Nico Menezes.
+## Roadmap
+
+- [ ] Attribute-chained timelines (`data-gsap-timeline`) to sequence multiple elements as one animation.
+- [ ] Dedicated parallax helpers.
+- [ ] Hover / click triggers (beyond scroll and load).
+- [ ] Exit presets for page transitions.
+
+---
+
+## License
+
+[MIT](LICENSE) · built by [Nico Menezes](https://github.com/nico-menezzes)
